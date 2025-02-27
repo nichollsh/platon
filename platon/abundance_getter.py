@@ -24,10 +24,10 @@ class AbundanceGetter:
 
         abundances_path = "data/abundances/{}".format(filename)
 
-        self.log_abundances = xp.log10(xp.load(
-            resource_filename(__name__, abundances_path)))
-                 
-        
+        abund_data = xp.load(resource_filename(__name__, abundances_path))
+        self.log_abundances = xp.log10(xp.clip(abund_data, 1e-30, None))
+
+
     def get(self, logZ, CO_ratio=0.53):
         '''Get an abundance grid at the specified logZ and C/O ratio.  This
         abundance grid can be passed to TransitDepthCalculator, with or without
