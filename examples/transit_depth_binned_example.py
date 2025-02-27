@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.interpolate
 
-from platon.fit_info import FitInfo
-from platon.retriever import Retriever
+# from platon.fit_info import FitInfo
+# from platon.retriever import Retriever
 from platon.constants import R_sun, R_jup, M_jup
 from platon.transit_depth_calculator import TransitDepthCalculator
 
@@ -35,7 +35,7 @@ T_guess = 1200
 
 depth_calculator = TransitDepthCalculator()
 depth_calculator.change_wavelength_bins(bins)
-wavelengths, depths = depth_calculator.compute_depths(1.19*R_sun, 0.73*M_jup, R_guess, T_guess, T_star=6091)
+wavelengths, depths, _ = depth_calculator.compute_depths(1.19*R_sun, 0.73*M_jup, R_guess, T_guess, T_star=6091, logZ=3, CO_ratio=0.5, )
 
 # Uncomment the code below to print
 
@@ -46,8 +46,9 @@ wavelengths, depths = depth_calculator.compute_depths(1.19*R_sun, 0.73*M_jup, R_
 
 # Uncomment the code below to plot
 
-#plt.plot(1e6*wavelengths, depths)
-#plt.xlabel("Wavelength (um)")
-#plt.ylabel("Transit depth")
-#plt.show()
+plt.plot(1e6*wavelengths, depths)
+plt.xlabel("Wavelength (um)")
+plt.ylabel("Transit depth")
+plt.show()
+plt.savefig("transit_binned.png", dpi=300)
 

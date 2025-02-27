@@ -6,14 +6,14 @@ from platon.constants import M_jup, R_sun, R_jup
 
 # All quantities in SI
 Rs = 1.16 * R_sun     #Radius of star
-Mp = 0.73 * M_jup     #Mass of planet
-Rp = 1.40 * R_jup      #Radius of planet
-T = 1200              #Temperature of isothermal part of the atmosphere
+Mp = 0.1 * M_jup     #Mass of planet
+Rp = 0.2 * R_jup      #Radius of planet
+T = 2500              #Temperature of isothermal part of the atmosphere
 
 #create a TransitDepthCalculator object and compute wavelength dependent transit depths
 depth_calculator = TransitDepthCalculator()
 wavelengths, transit_depths, _ = depth_calculator.compute_depths(
-    Rs, Mp, Rp, T, logZ=0, CO_ratio=0.5, cloudtop_pressure=1e4)
+    Rs, Mp, Rp, T, logZ=1, CO_ratio=0.5, cloudtop_pressure=1e4)
 
 
 # Uncomment the code below to print
@@ -24,7 +24,8 @@ wavelengths, transit_depths, _ = depth_calculator.compute_depths(
 
 # Uncomment the code below to plot
 
-plt.semilogx(1e6*wavelengths, transit_depths)
+plt.semilogx(1e6*wavelengths, transit_depths*1e6)
 plt.xlabel("Wavelength (um)")
-plt.ylabel("Transit depth")
+plt.ylabel("Transit depth (ppm)")
 plt.show()
+plt.savefig("transit_depth.png", dpi=300)

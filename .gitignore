@@ -1,2 +1,5 @@
 *.pyc
 *~
+platon/data/
+platon.egg-info
+nogit*
